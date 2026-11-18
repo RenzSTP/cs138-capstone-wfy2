@@ -76,7 +76,7 @@ def max_axis_variance(points: list[Point], numpoints: int) -> Axis:
         return var_x
 
 def buildTree(points: list[Point], left: int, right: int) -> TreeNode | None:
-    """Build the Original Node Tree"""
+    """Build the KD Tree"""
     if left == right: #inclusive exclusive for easier slices
         return None
     mid = (left + right) / 2
@@ -94,3 +94,5 @@ def buildTree(points: list[Point], left: int, right: int) -> TreeNode | None:
     root_node.y_range = [min(root_node.left.y_range[0], root_node.right.y_range[0]), max(root_node.left.y_range[1], root_node.right.y_range[1])]
 
     return root_node
+            
+        
