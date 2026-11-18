@@ -1,9 +1,15 @@
+stuff
+
 https://www.geeksforgeeks.org/python/python-property-decorator-property/
 https://www.geeksforgeeks.org/python/getter-and-setter-in-python/
 https://arxiv.org/pdf/2102.10808 - paper for the build
-https://www.scribbr.com/statistics/variance/ - ah yes i forgot how to compute variance (well we don't need this)
+https://www.scribbr.com/statistics/variance/ - ah yes i forgot how to compute variance (well we don't need this) feel free to delete this
 https://www.geeksforgeeks.org/python/python-lambda-anonymous-functions-filter-map-reduce/ - ah yes i forgot cs11
+https://www.geeksforgeeks.org/dsa/search-and-insertion-in-k-dimensional-tree/ - pasend ng help
+
+documaenatation
 https://docs.python.org/3/library/heapq.html#heapq.heapify_max
+https://docs.python.org/3/library/enum.html
 
 ai asistant
 
