@@ -1,5 +1,12 @@
 https://www.geeksforgeeks.org/python/python-property-decorator-property/
 https://www.geeksforgeeks.org/python/getter-and-setter-in-python/
-https://arxiv.org/pdf/2102.10808 - paper
-https://www.scribbr.com/statistics/variance/ - ah yes i forgot how to compute variance
+https://arxiv.org/pdf/2102.10808 - paper for the build
+https://www.scribbr.com/statistics/variance/ - ah yes i forgot how to compute variance (well we don't need this)
 https://www.geeksforgeeks.org/python/python-lambda-anonymous-functions-filter-map-reduce/ - ah yes i forgot cs11
+https://docs.python.org/3/library/heapq.html#heapq.heapify_max
+
+ai asistant
+
+https://chatgpt.com/share/6afdb649-4980-83e8-9203-84411ae23b1d - final debug
+https://chatgpt.com/share/6afdb65f-ff1c-83ee-82a1-205de6839e80 - second wave of debug
+https://chatgpt.com/share/6afdb672-0e90-83e8-846d-920cf188d9af - first wave of debug
