@@ -1,3 +1,5 @@
 https://www.geeksforgeeks.org/python/python-property-decorator-property/
 https://www.geeksforgeeks.org/python/getter-and-setter-in-python/
 https://arxiv.org/pdf/2102.10808 - paper
+https://www.scribbr.com/statistics/variance/ - ah yes i forgot how to compute variance
+https://www.geeksforgeeks.org/python/python-lambda-anonymous-functions-filter-map-reduce/ - ah yes i forgot cs11
