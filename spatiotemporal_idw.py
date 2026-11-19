@@ -73,7 +73,8 @@ def get_concentration(
 
     if not neighbors:
         # not sure yet what value it should be
-        ...
+        print("No neighbors, or k = 0")
+        return pm25s[root.id]       # this just returns the exact PM2.5 value at root
 
     # for exact space-time matches, where the distance is close to 0 to avoid div/zero
     w_exact = [pm25s[nei.id] for nei in neighbors if nei.distance_sq <= 1e-18]
