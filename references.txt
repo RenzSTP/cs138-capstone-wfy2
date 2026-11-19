@@ -1,19 +1,78 @@
-stuff
+Annotated bibliography and implementation provenance
+Verified for notebook integration on 2026-11-19.
+This is NOT a pip requirements file. Notebook third-party dependencies: pandas,
+requests. heapq, enum, dataclasses, and the other Python utilities are standard
+library modules; knearestneighbors.py is a local module.
+
+METHOD REFERENCES
+
+Cai, Y., Xu, W., & Zhang, F. (2021).
+ikd-Tree: An Incremental K-D Tree for Robotic Applications. arXiv:2102.10808.
+https://arxiv.org/abs/2102.10808
+https://arxiv.org/pdf/2102.10808
+https://arxiv.org/html/2102.10808v1#S3.SS2
+The abstract and PDF are the same source. Section III-B / Algorithm 2 describes
+sorting and median-based construction with a maximal-covariance axis and extra
+incremental metadata. Our static 2-D tree alternates X/Y axes and implements
+neither the covariance choice nor incremental insertion/deletion/rebalancing.
+
+Li, L., Losser, T., Yorke, C., & Piltner, R. (2014).
+Fast inverse distance weighting-based spatiotemporal interpolation: A web-based
+application of interpolating daily fine particulate matter PM2.5 in the
+contiguous U.S. using parallel programming and k-d tree.
+International Journal of Environmental Research and Public Health, 11(9),
+9101-9141. https://doi.org/10.3390/ijerph110909101
+https://www.mdpi.com/1660-4601/11/9/9101
+Existing proposal source; relevant full-text sections checked. Section 2.2.1
+supports inverse-distance weights; Sections 2.4.3 and 2.4.5-2.4.6 describe cyclic
+axis partitioning and bounded nearest-neighbor selection. The paper includes
+time as a dimension; our current tree selects a date first and uses only x/y.
+Its reported performance and pollution-validation results are not our results.
+
+PYTHON DOCUMENTATION
+
+https://docs.python.org/3/library/heapq.html#heapq.heapify_max
+Original teammate link. Public max-heap functions were added in Python 3.14:
+https://docs.python.org/3.14/library/heapq.html
+The compatible implementation uses min-heap heappush/heapreplace with negated
+priorities, as supported by the earlier API:
+https://docs.python.org/3.13/library/heapq.html
+
+https://docs.python.org/3/library/enum.html
+Supports the Axis enum, not an interpolation method.
+https://docs.python.org/3.13/library/functions.html#property
+https://docs.python.org/3.13/tutorial/controlflow.html#lambda-expressions
+Canonical documentation for read-only accessors and the axis sorting key.
+
+SPATIAL COORDINATE PREPARATION
+
+https://proj.org/en/stable/operations/projections/utm.html
+Explains UTM as a geodetic-to-projected transformation. Real stations and query
+points must share a suitable projected CRS with metre units. No coordinates
+are supplied or inferred by this reference; the current CSV has none.
+
+TEAMMATE'S INTRODUCTORY CODING AIDS (retained as provenance)
 
 https://www.geeksforgeeks.org/python/python-property-decorator-property/
+Python property decorator - @property (2025). TreeNode accessor background.
 https://www.geeksforgeeks.org/python/getter-and-setter-in-python/
-https://arxiv.org/pdf/2102.10808 - paper for the build
-https://www.scribbr.com/statistics/variance/ - ah yes i forgot how to compute variance (well we don't need this) feel free to delete this
-https://www.geeksforgeeks.org/python/python-lambda-anonymous-functions-filter-map-reduce/ - ah yes i forgot cs11
-https://www.geeksforgeeks.org/dsa/search-and-insertion-in-k-dimensional-tree/ - pasend ng help
-https://arxiv.org/abs/2102.10808  - the original link
+Getter and setter in Python (2025). Accessor background; no setters are used.
+https://www.geeksforgeeks.org/python/python-lambda-anonymous-functions-filter-map-reduce/
+Python lambda functions (2026). Sorting-key syntax background.
+https://www.geeksforgeeks.org/dsa/search-and-insertion-in-k-dimensional-tree/
+Search and insertion in K dimensional tree (2025). Axis-partitioning background;
+not a source for bounded k-nearest-neighbor selection or IDW.
 
-documaenatation
-https://docs.python.org/3/library/heapq.html#heapq.heapify_max
-https://docs.python.org/3/library/enum.html
+UNUSED READING NOTE
 
-ai asistant
+https://www.scribbr.com/statistics/variance/
+Variance refresher from the teammate's notes. The implemented alternating-axis
+tree computes no variance/covariance statistic, so this is not a method citation.
 
-https://chatgpt.com/share/6afdb649-4980-83e8-9203-84411ae23b1d - final debug
-https://chatgpt.com/share/6afdb65f-ff1c-83ee-82a1-205de6839e80 - second wave of debug
-https://chatgpt.com/share/6afdb672-0e90-83e8-846d-920cf188d9af - first wave of debug
+AI ASSISTANCE / DEBUGGING PROVENANCE (not scientific evidence)
+
+https://chatgpt.com/share/6afdb649-4980-83e8-9203-84411ae23b1d - final debugging
+https://chatgpt.com/share/6afdb65f-ff1c-83ee-82a1-205de6839e80 - second debugging wave
+https://chatgpt.com/share/6afdb672-0e90-83e8-846d-920cf188d9af - first debugging wave
+Descriptions are from the original source list. Shared-chat contents could not
+be retrieved during verification; no support claims are made from those chats.
