@@ -1,4 +1,4 @@
-"""Static two-dimensional k-d tree and exact nearest-neighbor selection.
+"""Static two/three-dimensional k-d tree and exact nearest-neighbor selection.
 
 Use finite coordinates in one common projected CRS with metre units for real
 spatial data. IDs must be unique integers; they stay attached to their points
@@ -14,9 +14,11 @@ from dataclasses import dataclass
 from enum import Enum
 from heapq import heappush, heapreplace
 
+# Uhm this should be three-dimensional k-d tree, 
+# since we are using the spatiotemporal version
 DIMS = 2
 
-Point = tuple[float, float]
+Point = tuple[float, ...]  # so it can support the 2D and 3D pts
 # Negated distance and ID put the worst candidate at the min-heap's root.
 _Candidate = tuple[float, int, Point]
 
@@ -24,6 +26,7 @@ _Candidate = tuple[float, int, Point]
 class Axis(Enum):
     X = 0
     Y = 1
+    T = 2  # for the time
 
 
 class TreeNode:
@@ -59,7 +62,7 @@ class Neighbor:
 
 
 def buildTree(
-    points: list[tuple[int, Point]], left: int, right: int, axisval: Axis
+    points: list[tuple[int, Point]], left: int, right: int, axisval: Axis, dims: int = DIMS,
 ) -> TreeNode | None:
     """Build a median-split tree over [left, right), reordering that slice.
 
@@ -73,7 +76,7 @@ def buildTree(
     points[left:right] = sorted(points[left:right], key=lambda p: p[1][axis])
     root_node = TreeNode(points[mid][1], points[mid][0], axisval)
 
-    next_axis = Axis((axisval.value + 1) % DIMS)
+    next_axis = Axis((axisval.value + 1) % dims)
     root_node.left = buildTree(points, left, mid, next_axis)
     root_node.right = buildTree(points, mid + 1, right, next_axis)
 
@@ -82,7 +85,7 @@ def buildTree(
 
 def distance_sq(p1: Point, p2: Point) -> float:
     """Squared Euclidean distance (m^2 when coordinates are in metres)."""
-    return (p2[0] - p1[0]) ** 2 + (p2[1] - p1[1]) ** 2
+    return sum((a - b) ** 2 for a, b in zip(p1, p2))  # this should work now for 2D/3D
 
 
 def search(
@@ -101,7 +104,7 @@ def search(
         return
 
     ref_point = root.point
-    dist = distance_sq(ref_point, query)
+    dist = distance_sq(ref_point, query) 
 
     # Exclude by identity, so a different co-located station remains eligible.
     if root.id != id:
